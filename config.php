@@ -1,12 +1,12 @@
 <?php
 // 데이터베이스 설정
 // Railway 환경변수 사용 (배포 시) 또는 로컬 설정 사용
-// Railway는 MYSQLHOST, MYSQLUSER 등의 형식도 사용할 수 있음
-define('DB_HOST', getenv('MYSQLHOST') ?: getenv('MYSQL_HOST') ?: getenv('DB_HOST') ?: '127.0.0.1');
+// PUBLIC 호스트를 우선 사용 (Private networking 문제 회피)
+define('DB_HOST', getenv('MYSQL_PUBLIC_HOST') ?: getenv('MYSQLHOST') ?: getenv('MYSQL_HOST') ?: getenv('DB_HOST') ?: '127.0.0.1');
 define('DB_USER', getenv('MYSQLUSER') ?: getenv('MYSQL_USER') ?: getenv('DB_USER') ?: 'root');
 define('DB_PASS', getenv('MYSQLPASSWORD') ?: getenv('MYSQL_PASSWORD') ?: getenv('DB_PASS') ?: '');
 define('DB_NAME', getenv('MYSQLDATABASE') ?: getenv('MYSQL_DATABASE') ?: getenv('DB_NAME') ?: 'chat_app');
-define('DB_PORT', getenv('MYSQLPORT') ?: getenv('MYSQL_PORT') ?: getenv('DB_PORT') ?: '3306');
+define('DB_PORT', getenv('MYSQL_PUBLIC_PORT') ?: getenv('MYSQLPORT') ?: getenv('MYSQL_PORT') ?: getenv('DB_PORT') ?: '3306');
 
 // 세션 시작
 if (session_status() === PHP_SESSION_NONE) {

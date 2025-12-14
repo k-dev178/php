@@ -9,12 +9,12 @@
  * 4. 완료 후 이 파일을 삭제하거나 이름 변경
  */
 
-// Railway 환경변수 사용 (여러 형식 지원)
-$host = getenv('MYSQLHOST') ?: getenv('MYSQL_HOST') ?: '127.0.0.1';
+// Railway 환경변수 사용 (PUBLIC 호스트 우선)
+$host = getenv('MYSQL_PUBLIC_HOST') ?: getenv('MYSQLHOST') ?: getenv('MYSQL_HOST') ?: '127.0.0.1';
 $user = getenv('MYSQLUSER') ?: getenv('MYSQL_USER') ?: 'root';
 $pass = getenv('MYSQLPASSWORD') ?: getenv('MYSQL_PASSWORD') ?: '';
 $dbname = getenv('MYSQLDATABASE') ?: getenv('MYSQL_DATABASE') ?: 'chat_app';
-$port = getenv('MYSQLPORT') ?: getenv('MYSQL_PORT') ?: '3306';
+$port = getenv('MYSQL_PUBLIC_PORT') ?: getenv('MYSQLPORT') ?: getenv('MYSQL_PORT') ?: '3306';
 
 echo "<h1>데이터베이스 설정 중...</h1>";
 echo "<pre>";
