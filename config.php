@@ -1,9 +1,11 @@
 <?php
 // 데이터베이스 설정
-define('DB_HOST', '127.0.0.1');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'chat_app');
+// Railway 환경변수 사용 (배포 시) 또는 로컬 설정 사용
+define('DB_HOST', getenv('MYSQL_HOST') ?: getenv('DB_HOST') ?: '127.0.0.1');
+define('DB_USER', getenv('MYSQL_USER') ?: getenv('DB_USER') ?: 'root');
+define('DB_PASS', getenv('MYSQL_PASSWORD') ?: getenv('DB_PASS') ?: '');
+define('DB_NAME', getenv('MYSQL_DATABASE') ?: getenv('DB_NAME') ?: 'chat_app');
+define('DB_PORT', getenv('MYSQL_PORT') ?: getenv('DB_PORT') ?: '3306');
 
 // 세션 시작
 if (session_status() === PHP_SESSION_NONE) {
@@ -13,7 +15,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // 데이터베이스 연결
 try {
     $pdo = new PDO(
-        "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+        "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4",
         DB_USER,
         DB_PASS,
         [
